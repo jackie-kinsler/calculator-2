@@ -2,6 +2,7 @@
 
 from arithmetic import (add, subtract, multiply, divide, square, cube,
                         power, mod, )
+from functools import reduce
 
 
 # Replace this with your code
@@ -10,30 +11,40 @@ user_input = input("")
 
 
 while user_input[0][0] != 'q' and user_input[0][0] != 'Q':
-    tokens = user_input.split(" ")
+    
+    inputs = user_input.split(" ")
+    operator = inputs.pop(0)
+    
+    tokens = []
 
-    if tokens[0] == '+':
-        print(add(float(tokens[1]), float(tokens[2])))
-    
-    elif tokens[0] == '-':
-        print(subtract(float(tokens[1]), float(tokens[2])))
-    
-    elif tokens[0] == '*':
-        print(multiply(float(tokens[1]), float(tokens[2])))
-    
-    elif tokens[0] == '/':
-        print(divide(float(tokens[1]), float(tokens[2])))
-    
-    elif tokens[0] == 'square':
-        print(square(float(tokens[1])))
-    
-    elif tokens[0] == 'cube':
-        print(cube(float(tokens[1])))
+    for num in inputs:
+        tokens.append(float(num))
 
-    elif tokens[0] == 'pow':
-        print(power(float(tokens[1]), float(tokens[2])))
-    
-    elif tokens[0] == 'mod':
-        print(mod(float(tokens[1]), float(tokens[2])))
+    try: 
+        if operator == '+':
+            print(reduce(add, tokens))
+        
+        elif operator == '-':
+            print(reduce(subtract, tokens))
+        
+        elif operator == '*':
+            print(reduce(multiply, tokens))
+        
+        elif operator == '/':
+            print(divide(float(tokens[1]), float(tokens[2])))
+        
+        elif operator == 'square':
+            print(square(float(tokens[1])))
+        
+        elif operator == 'cube':
+            print(cube(float(tokens[1])))
+
+        elif operator == 'pow':
+            print(power(float(tokens[1]), float(tokens[2])))
+        
+        elif operator == 'mod':
+            print(mod(float(tokens[1]), float(tokens[2])))
+    except:
+        print("invalid input")
 
     user_input = input("")
